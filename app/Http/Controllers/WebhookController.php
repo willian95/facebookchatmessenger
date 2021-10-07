@@ -13,7 +13,15 @@ class WebhookController extends Controller
         Log::info("verify");
         Log::info($request->toArray());
         
-        return response()->json($request->{'hub.challenge'}, 200);
+        if ($request->{"hub.verify_token"} === env("VERIFICATION_TOKEN")) {
+            return response()->json($request->{'hub.challenge'}, 200);
+        }else{
+
+            return response()->json(['error' => 'Not authorized.'],403);
+
+        }
+
+        
 
     }
 
