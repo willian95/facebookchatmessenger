@@ -13,7 +13,7 @@ class WebhookController extends Controller
         Log::info("verify");
         Log::info($request->toArray());
         
-        return response()->json($request->{'hub.challenge'});
+        return response()->json($request->{'hub.challenge'}, 200);
 
     }
 
